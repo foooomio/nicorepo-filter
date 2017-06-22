@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "ニコレポ・フィルター",
+    "version": "1.0.0",
+    "description": "ニコレポ・フィルター",
+    "permissions": [ "declarativeContent", "storage" ],
+    "background": {
+        "scripts": [ "js/background.js" ],
+        "persistent": false
+    },
+    "page_action": {
+        "default_title": "ニコレポ・フィルター",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [{
+        "matches": [
+            "http://www.nicovideo.jp/my/top*",
+            "http://www.nicovideo.jp/user*"
+        ],
+        "js": [
+            "js/timeline.js",
+            "js/message.js",
+            "js/content.js"
+        ],
+        "css": [ "css/fix.css" ],
+        "run_at": "document_start"
+    }]
+}

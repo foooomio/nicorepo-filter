@@ -1,0 +1,12 @@
+/*
+ * fix.css
+ */
+
+.nicorepo .nicorepo-page .log {
+  margin-top: 0 !important;
+  padding: 8px !important;
+}
+
+.log .log-mute-button {
+  right: 8px !important;
+}

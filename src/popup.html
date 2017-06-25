@@ -1,7 +1,65 @@
 <!doctype html>
 <html>
+  <head>
+    <title>ニコレポ・フィルター</title>
+    <link rel="stylesheet" href="css/bulma.min.css">
+    <link rel="stylesheet" href="css/popup.css">
+  </head>
   <body>
-    hello
+    <table class="table">
+      <thead>
+        <tr>
+          <th>投稿者</th>
+          <th>行動</th>
+          <th>アクション</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody id="rules">
+        <tr>
+          <td>ユーザー の</td>
+          <td>動画の投稿 を</td>
+          <td>ハイライト</td>
+          <td><a class="delete is-small"></a></td>
+        </tr>
+        <tr>
+          <td>ユーザー の</td>
+          <td>再生数キリ番達成 を</td>
+          <td>ミュート</td>
+          <td><a class="delete is-small"></a></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <span class="select is-small">
+              <select id="item-author">
+                <option value="0">自分の</option>
+                <option value="1" selected>ユーザーの</option>
+                <option value="2">チャンネルの</option>
+                <option value="3">コミュニティの</option>
+              </select>
+            </span>
+          </td>
+          <td>
+            <span class="select is-small">
+              <select id="item-type">
+              </select>
+            </span>
+          </td>
+          <td>
+            <span class="select is-small">
+              <select id="item-action">
+                <option value="mute">ミュート</option>
+                <option value="highlight">ハイライト</option>
+              </select>
+            </span>
+          </td>
+          <td><a id="item-add" class="button is-small is-primary is-outlined">＋</a></td>
+        </tr>
+      </tfoot>
+    </table>
+    <script src="js/message.js"></script>
+    <script src="js/popup.js"></script>
   </body>
-  <script src="js/popup.js"></script>
 </html>

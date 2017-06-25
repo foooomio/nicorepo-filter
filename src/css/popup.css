@@ -1,0 +1,11 @@
+/*
+ * popup.css
+ */
+
+td, th {
+  white-space: nowrap;
+}
+
+.table {
+  margin-bottom: 0 !important;
+}

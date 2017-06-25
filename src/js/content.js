@@ -29,6 +29,10 @@ const initializer = new MutationObserver(mutations => {
         // Observe the page load more nicorepo
         observer.observe(target, { childList: true });
         initializer.disconnect();
+
+        // Force to fire LazyLoad
+        window.scroll(0, 1);
+        window.scroll(0, 0);
     });
 });
 

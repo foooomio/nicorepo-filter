@@ -36,15 +36,6 @@ const initializer = new MutationObserver(mutations => {
     });
 });
 
-// TODO: Sample Code
-chrome.storage.sync.set({
-    rules: [
-        { type: 'nicovideo.user.video.kiriban.play', action: 'mute' },
-        { type: 'live.channel.program.reserve', action: 'mute' },
-        { type: 'nicovideo.user.video.upload', action: 'highlight' },
-    ]
-});
-
 // Get stored data
 chrome.storage.sync.get(null, data =>
     data.rules && Timeline.addRules(data.rules)

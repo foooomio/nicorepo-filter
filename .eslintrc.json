@@ -26,6 +26,7 @@
     "globals": {
         "chrome": false,
         "Message": false,
+        "Author": false,
         "Timeline": false,
         "TimelineItem": false
     }

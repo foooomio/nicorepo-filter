@@ -4,26 +4,52 @@
 
 'use strict';
 
+const actions = {
+    mute: 'ミュート',
+    highlight: 'ハイライト',
+};
+
+const rules = {
+    items: [],
+    element: $('rules'),
+    add: function(rule) {
+        const message = Message.findByType(rule.type);
+        this.element.innerHTML +=
+            `<tr>
+              <td>${message.author.label} の</td>
+              <td>${message.label} を</td>
+              <td>${actions[rule.action]}</td>
+              <td><a class="delete is-small"></a></td>
+            </tr>`;
+        this.items.push(rule);
+    },
+    save: function() {
+        chrome.storage.sync.set({ rules: this.items });
+    }
+};
+
 const form = {
     author: $('item-author'),
     type: $('item-type'),
     action: $('item-action'),
-    add: $('item-add'),
-    fragments: (() =>
-        ['myself', 'user', 'channel', 'community'].map(author => {
+    button: $('item-add'),
+    fragments: (() => {
+        const obj = {};
+        Object.values(Author).map(author => {
             const fragment = document.createDocumentFragment();
-            const elements = Message[author].map(message => {
+            const elements = Message.findByAuthor(author).map(message => {
                 const option = document.createElement('option');
-                option.innerText = message.label;
+                option.innerText = message.label + 'を';
                 option.value = message.type;
                 return option;
             });
             elements.map(element => fragment.appendChild(element));
-            return fragment;
-        })
-    )(),
+            obj[author.value] = fragment;
+        });
+        return obj;
+    })(),
     init: function() {
-        this.type.appendChild(this.fragments[1].cloneNode(true));
+        this.type.appendChild(this.fragments.user.cloneNode(true));
 
         this.author.addEventListener('change', e => {
             Array.from(this.type.childNodes).map(node => node.remove());
@@ -31,13 +57,20 @@ const form = {
             this.type.appendChild(clone);
         }, false);
 
-        document.getElementById('item-add').addEventListener('click', () => {
-            console.log(this.type.value, this.action.value);
+        this.button.addEventListener('click', () => {
+            const rule = { type: this.type.value, action: this.action.value };
+            rules.add(rule);
+            rules.save();
         });
     }
 };
 
-form.init();
+document.addEventListener('DOMContentLoaded', () => {
+    form.init();
+    chrome.storage.sync.get(null, data =>
+        data.rules.map(rule => rules.add(rule))
+    );
+});
 
 function $(id) {
     return document.getElementById(id);

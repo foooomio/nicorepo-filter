@@ -3,12 +3,22 @@
     "name": "ニコレポ・フィルター",
     "version": "1.0.0",
     "description": "ニコレポ・フィルター",
+    "icons": {
+        "16": "img/icon16.png",
+        "48": "img/icon48.png",
+        "128": "img/icon128.png"
+    },
     "permissions": [ "declarativeContent", "storage" ],
     "background": {
         "scripts": [ "js/background.js" ],
         "persistent": false
     },
     "page_action": {
+        "default_icon": {
+            "16": "img/icon16.png",
+            "24": "img/icon24.png",
+            "32": "img/icon32.png"
+        },
         "default_title": "ニコレポ・フィルター",
         "default_popup": "popup.html"
     },

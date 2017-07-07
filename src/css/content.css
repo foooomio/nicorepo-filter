@@ -1,5 +1,5 @@
 /*
- * fix.css
+ * content.css
  */
 
 .nicorepo .nicorepo-page .log {
@@ -9,4 +9,12 @@
 
 .log .log-mute-button {
   right: 8px !important;
+}
+
+.filter-mute {
+  display: none;
+}
+
+.filter-highlight {
+  background-color: #ffccff;
 }

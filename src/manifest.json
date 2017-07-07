@@ -22,7 +22,7 @@
             "js/message.js",
             "js/content.js"
         ],
-        "css": [ "css/fix.css" ],
+        "css": [ "css/content.css" ],
         "run_at": "document_start"
     }]
 }

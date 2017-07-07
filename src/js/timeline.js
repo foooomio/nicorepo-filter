@@ -17,16 +17,16 @@ class TimelineItem {
         return rule.type === this.type;
     }
     mute() {
-        this.node.style.display = 'none';
-        this.node.style.backgroundColor = '';
+        this.node.classList.add('filter-mute');
+        this.node.classList.remove('filter-highlight');
     }
     highlight() {
-        this.node.style.display = 'block';
-        this.node.style.backgroundColor = 'pink';
+        this.node.classList.remove('filter-mute');
+        this.node.classList.add('filter-highlight');
     }
     reset() {
-        this.node.style.display = 'block';
-        this.node.style.backgroundColor = '';
+        this.node.classList.remove('filter-mute');
+        this.node.classList.remove('filter-highlight');
     }
 }
 

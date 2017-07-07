@@ -9,3 +9,7 @@ td, th {
 .table {
   margin-bottom: 0 !important;
 }
+
+.modal-content {
+  max-height: none !important;
+}

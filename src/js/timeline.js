@@ -10,16 +10,15 @@ class TimelineItem {
         this.type = Message.findByText(node.innerText).type;
     }
     action(rules) {
-        rules.some(rule =>
-            this.match(rule) && !this[rule.action]()
-        ) || this.reset();
+        rules.some(rule => this.match(rule) && !this[rule.action]())
+            || this.reset();
     }
     match(rule) {
         return rule.type === this.type;
     }
     mute() {
         this.node.style.display = 'none';
-        this.node.style.backgroundColor = 'none';
+        this.node.style.backgroundColor = '';
     }
     highlight() {
         this.node.style.display = 'block';
@@ -27,7 +26,7 @@ class TimelineItem {
     }
     reset() {
         this.node.style.display = 'block';
-        this.node.style.backgroundColor = 'none';
+        this.node.style.backgroundColor = '';
     }
 }
 
@@ -37,8 +36,8 @@ const Timeline = {
     /**
      * @param {Object} rule
      */
-    addRules(rules) {
-        this.rules = this.rules.concat(rules);
+    setRules(rules) {
+        this.rules = rules;
         this.items.map(item => item.action(this.rules));
     },
     /**

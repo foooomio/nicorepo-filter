@@ -12,10 +12,13 @@ const actions = {
 const rules = {
     items: [],
     element: $('rules'),
+    exists: function(rule) {
+        return this.items.some(item => item.type === rule.type);
+    },
     add: function(rule) {
         const message = Message.findByType(rule.type);
         this.element.innerHTML +=
-            `<tr>
+            `<tr data-type="${rule.type}">
               <td>${message.author.label} の</td>
               <td>${message.label} を</td>
               <td>${actions[rule.action]}</td>
@@ -23,8 +26,24 @@ const rules = {
             </tr>`;
         this.items.push(rule);
     },
-    save: function() {
-        chrome.storage.sync.set({ rules: this.items });
+    remove: function(rule) {
+        this.items = this.items.filter(item => item.type !== rule.type);
+    },
+    save: function(callback=undefined) {
+        chrome.storage.sync.set({ rules: this.items }, callback);
+    },
+    init: function() {
+        this.element.addEventListener('click', e => {
+            if (e.target.classList.contains('delete')) {
+                const node = e.target.parentNode.parentNode;
+                this.remove({ type: node.dataset.type });
+                this.save(() => node.remove());
+            }
+        });
+
+        chrome.storage.sync.get(null, data =>
+            data.rules.map(rule => this.add(rule))
+        );
     }
 };
 
@@ -59,17 +78,34 @@ const form = {
 
         this.button.addEventListener('click', () => {
             const rule = { type: this.type.value, action: this.action.value };
-            rules.add(rule);
-            rules.save();
+            if (rules.exists(rule)) {
+                modal.show('同じ条件のルールがすでに存在します。');
+            } else {
+                rules.add(rule);
+                rules.save();
+            }
         });
     }
 };
 
+const modal = {
+    element: $('modal'),
+    text: $('modal-text'),
+    show(message) {
+        this.text.innerText = message;
+        this.element.classList.add('is-active');
+    },
+    init() {
+        this.element.addEventListener('click', () =>
+            this.element.classList.remove('is-active')
+        );
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    rules.init();
     form.init();
-    chrome.storage.sync.get(null, data =>
-        data.rules.map(rule => rules.add(rule))
-    );
+    modal.init();
 });
 
 function $(id) {

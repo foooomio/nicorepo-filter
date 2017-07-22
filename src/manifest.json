@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "ニコレポ・フィルター",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "ニコニコ動画のニコレポタイムラインにミュート・ハイライト機能を追加します。",
     "icons": {
         "16": "img/icon16.png",

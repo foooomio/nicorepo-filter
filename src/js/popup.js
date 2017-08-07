@@ -5,34 +5,40 @@
 'use strict';
 
 const actions = {
-    mute: 'ミュート',
-    highlight: 'ハイライト',
+    mute: { value: 'mute', label: 'ミュート' },
+    highlight: { value: 'highlight', label: 'ハイライト' },
 };
 
 const rules = {
     items: [],
     element: $('rules'),
-    exists: function(rule) {
+    exists(rule) {
         return this.items.some(item => item.type === rule.type);
     },
-    add: function(rule) {
+    add(rule) {
         const message = Message.findByType(rule.type);
         this.element.innerHTML +=
             `<tr data-type="${rule.type}">
               <td>${message.author.label} の</td>
               <td>${message.label} を</td>
-              <td>${actions[rule.action]}</td>
+              <td>${actions[rule.action].label}</td>
               <td><a class="delete is-small"></a></td>
             </tr>`;
         this.items.push(rule);
     },
-    remove: function(rule) {
+    remove(rule) {
         this.items = this.items.filter(item => item.type !== rule.type);
     },
-    save: function(callback=undefined) {
-        chrome.storage.sync.set({ rules: this.items }, callback);
+    save(callback = undefined) {
+        chrome.storage.sync.set({ rules: this.items }, () => {
+            if (chrome.runtime.lastError) {
+                modal.show(chrome.runtme.lastError);
+            } else {
+                callback && callback();
+            }
+        });
     },
-    init: function() {
+    init() {
         this.element.addEventListener('click', e => {
             if (e.target.classList.contains('delete')) {
                 const node = e.target.parentNode.parentNode;
@@ -67,7 +73,7 @@ const form = {
         });
         return obj;
     })(),
-    init: function() {
+    init() {
         this.type.appendChild(this.fragments.user.cloneNode(true));
 
         this.author.addEventListener('change', e => {

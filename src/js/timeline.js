@@ -36,7 +36,7 @@ const Timeline = {
     /**
      * @param {Object} rule
      */
-    setRules(rules) {
+    actionAll(rules) {
         this.rules = rules;
         this.items.map(item => item.action(this.rules));
     },

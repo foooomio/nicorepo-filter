@@ -17,13 +17,31 @@ const rules = {
     },
     add(rule) {
         const message = Message.findByType(rule.type);
-        this.element.innerHTML +=
-            `<tr data-type="${rule.type}">
-              <td>${message.author.label} の</td>
-              <td>${message.label} を</td>
-              <td>${actions[rule.action].label}</td>
-              <td><a class="delete is-small"></a></td>
-            </tr>`;
+        const element = (() => {
+            const tr = document.createElement('tr');
+            tr.dataset.type = rule.type;
+            const author = document.createElement('td');
+            author.innerText = message.author.label + ' の';
+            const type = document.createElement('td');
+            type.innerText = message.label + ' を';
+            const action = document.createElement('td');
+            action.innerText = actions[rule.action].label;
+            if (rule.action === actions.highlight.value) {
+                const highlight = document.createElement('span');
+                highlight.className = 'tag';
+                highlight.style.backgroundColor = rule.color;
+                highlight.innerText = '色';
+                action.appendChild(highlight);
+            }
+            const remove = document.createElement('td');
+            remove.innerHTML = '<a class="delete is-small"></a>';
+            tr.appendChild(author);
+            tr.appendChild(type);
+            tr.appendChild(action);
+            tr.appendChild(remove);
+            return tr;
+        })();
+        this.element.appendChild(element);
         this.items.push(rule);
     },
     remove(rule) {
@@ -58,6 +76,7 @@ const form = {
     type: $('item-type'),
     action: $('item-action'),
     button: $('item-add'),
+    highlight: $('item-highlight'),
     fragments: (() => {
         const obj = {};
         Object.values(Author).map(author => {
@@ -80,10 +99,25 @@ const form = {
             Array.from(this.type.childNodes).map(node => node.remove());
             const clone = this.fragments[e.target.value].cloneNode(true);
             this.type.appendChild(clone);
-        }, false);
+        });
+
+        this.action.addEventListener('change', e =>
+            this.highlight.disabled = (e.target.value !== actions.highlight.value)
+        );
+
+        this.highlight.addEventListener('click', () =>
+            highlight.selectColor()
+        );
 
         this.button.addEventListener('click', () => {
             const rule = { type: this.type.value, action: this.action.value };
+            if (rule.action === actions.highlight.value) {
+                if (!this.highlight.value) {
+                    modal.show('ハイライト色が選択されていません。');
+                    return;
+                }
+                rule.color = this.highlight.value;
+            }
             if (rules.exists(rule)) {
                 modal.show('同じ条件のルールがすでに存在します。');
             } else {
@@ -108,10 +142,44 @@ const modal = {
     }
 };
 
+const highlight = {
+    element: $('highlight'),
+    colors: $('highlight-colors'),
+    pallet: [
+        { value: '#ffcdea', label: '赤' },
+        { value: '#eaffcd', label: '緑' },
+        { value: '#cdeaff', label: '青' },
+        { value: '#fffbcd', label: '黄' },
+        { value: '#cdd1ff', label: '紫' },
+    ],
+    selectColor() {
+        this.element.classList.add('is-active');
+    },
+    init() {
+        this.element.addEventListener('click', e => {
+            if (e.target.dataset.color) {
+                form.highlight.value = e.target.dataset.color;
+                form.highlight.style.backgroundColor = e.target.dataset.color;
+            }
+            this.element.classList.remove('is-active');
+        });
+
+        this.pallet.map(color => {
+            const button = document.createElement('a');
+            button.className = 'button';
+            button.style.backgroundColor = color.value;
+            button.dataset.color = color.value;
+            button.innerText = color.label;
+            this.colors.appendChild(button);
+        });
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     rules.init();
     form.init();
     modal.init();
+    highlight.init();
 });
 
 function $(id) {

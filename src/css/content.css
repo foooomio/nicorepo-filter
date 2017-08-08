@@ -10,11 +10,3 @@
 .log .log-mute-button {
   right: 8px !important;
 }
-
-.filter-mute {
-  display: none;
-}
-
-.filter-highlight {
-  background-color: #ffccff;
-}

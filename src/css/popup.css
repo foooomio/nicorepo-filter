@@ -13,3 +13,13 @@ td, th {
 .modal-content {
   max-height: none !important;
 }
+
+#highlight-colors .button {
+  padding-left: 2em;
+  padding-right: 2em;
+  margin: .5em;
+}
+
+#rules .tag {
+  height: 1.5em;
+}

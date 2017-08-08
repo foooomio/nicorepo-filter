@@ -10,23 +10,24 @@ class TimelineItem {
         this.type = Message.findByText(node.innerText).type;
     }
     action(rules) {
-        rules.some(rule => this.match(rule) && !this[rule.action]())
-            || this.reset();
+        rules.some(rule =>
+            this.match(rule) && !this[rule.action](rule)
+        ) || this.reset();
     }
     match(rule) {
         return rule.type === this.type;
     }
-    mute() {
-        this.node.classList.add('filter-mute');
-        this.node.classList.remove('filter-highlight');
+    mute(rule) {
+        this.node.style.display = 'none';
+        this.node.style.backgroundColor = 'initial';
     }
-    highlight() {
-        this.node.classList.remove('filter-mute');
-        this.node.classList.add('filter-highlight');
+    highlight(rule) {
+        this.node.style.display = 'block';
+        this.node.style.backgroundColor = rule.color;
     }
     reset() {
-        this.node.classList.remove('filter-mute');
-        this.node.classList.remove('filter-highlight');
+        this.node.style.display = 'block';
+        this.node.style.backgroundColor = 'initial';
     }
 }
 

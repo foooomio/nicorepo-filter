@@ -40,13 +40,15 @@ const Message = {
         {
             label: 'ニコニ広告の宣伝(された)',
             type: 'nicovideo.user.video.advertised_announce',
-            regexp: /.*? さんの動画が .*? さんにニコニ広告で宣伝されました。 .*?/,
+            // also nicoad.user.advertised.video.announce
+            regexp: /.*? さんの動画が .*? さんにニコニ広告(?:で宣伝)?されました。 .*?/,
             author: Author.user,
         },
         {
             label: 'ニコニ広告の宣伝(した)',
             type: 'nicovideo.user.video.advertise',
-            regexp: /.*? さんが ニコニ広告で宣伝しました。 .*?/,
+            // also nicoad.user.advertise.video
+            regexp: /.*? さんが ?ニコニ広告(?:で宣伝)?しました。 .*?/,
             author: Author.user,
         },
         {

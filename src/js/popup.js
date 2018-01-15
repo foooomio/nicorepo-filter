@@ -66,7 +66,7 @@ const rules = {
         });
 
         chrome.storage.sync.get(null, data =>
-            data.rules.map(rule => this.add(rule))
+            data.rules && data.rules.map(rule => this.add(rule))
         );
     }
 };

@@ -8,7 +8,7 @@
         "48": "img/icon48.png",
         "128": "img/icon128.png"
     },
-    "permissions": [ "declarativeContent", "storage" ],
+    "permissions": [ "storage" ],
     "background": {
         "scripts": [ "js/background.js" ],
         "persistent": false

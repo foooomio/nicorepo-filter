@@ -50,7 +50,7 @@ const rules = {
     save(callback = undefined) {
         chrome.storage.sync.set({ rules: this.items }, () => {
             if (chrome.runtime.lastError) {
-                modal.show(chrome.runtme.lastError);
+                modal.show(chrome.runtime.lastError);
             } else {
                 callback && callback();
             }

@@ -38,10 +38,10 @@ const initializer = new MutationObserver(mutations => {
 
 // Get stored data
 chrome.storage.sync.get(null, data =>
-    Timeline.actionAll(data.rules)
+    data.rules && Timeline.actionAll(data.rules)
 );
 chrome.storage.onChanged.addListener(data =>
-    Timeline.actionAll(data.rules.newValue)
+    data.rules && Timeline.actionAll(data.rules.newValue)
 );
 
 // Call the initializer

@@ -23,3 +23,15 @@ td, th {
 #rules .tag {
   height: 1.5em;
 }
+
+#rules .empty {
+  display: none;
+}
+
+#rules .empty:only-child {
+  display: table-row;
+}
+
+#rules .empty td {
+  text-align: center;
+}

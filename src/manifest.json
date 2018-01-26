@@ -34,5 +34,10 @@
         ],
         "css": [ "css/content.css" ],
         "run_at": "document_start"
-    }]
+    }],
+    "applications": {
+        "gecko": {
+            "id": "nicorepo-filter@foooomio.net"
+        }
+    }
 }

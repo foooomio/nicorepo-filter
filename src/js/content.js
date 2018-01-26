@@ -44,6 +44,8 @@ chrome.storage.onChanged.addListener(data =>
     data.rules && Timeline.actionAll(data.rules.newValue)
 );
 
+chrome.runtime.sendMessage('show_page_action');
+
 // Call the initializer
 document.addEventListener('DOMContentLoaded', () => {
     const target = document.getElementsByClassName('nicorepo-page')[0];

@@ -17,6 +17,8 @@ const observer = new MutationObserver(mutations => {
 const initializer = new MutationObserver(mutations => {
     mutations.filter(mutation =>
         mutation.addedNodes.length
+    ).filter(mutation =>
+        mutation.addedNodes[0].className === 'NicorepoTimeline timeline'
     ).map(mutation => {
         const target = mutation.addedNodes[0];
 
@@ -48,6 +50,6 @@ chrome.runtime.sendMessage('show_page_action');
 
 // Call the initializer
 document.addEventListener('DOMContentLoaded', () => {
-    const target = document.getElementsByClassName('nicorepo-page')[0];
-    initializer.observe(target, { childList: true });
+    const target = document.getElementById('MyPageNicorepoApp');
+    initializer.observe(target, { childList: true, subtree: true });
 });

@@ -50,6 +50,7 @@ chrome.runtime.sendMessage('show_page_action');
 
 // Call the initializer
 document.addEventListener('DOMContentLoaded', () => {
-    const target = document.getElementById('MyPageNicorepoApp');
+    const target = document.getElementById('MyPageNicorepoApp')
+                || document.getElementById('UserPageNicorepoApp');
     initializer.observe(target, { childList: true, subtree: true });
 });

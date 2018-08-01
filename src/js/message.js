@@ -41,13 +41,17 @@ const Message = {
             label: 'ニコニ広告の宣伝(された)',
             type: 'nicovideo.user.video.advertised_announce',
             // also nicoad.user.advertised.video.announce
-            regexp: /.*? さんの動画が .*? さんにニコニ広告(?:で宣伝)?されました。 .*?/,
+            // also nicoad.user.advertised.program.announce
+            // also nicoad.user.advertised.program.cas.announce
+            regexp: /.*? さんの(?:動画|生放送(?:（実験放送）)?)が .*? さんにニコニ広告(?:で宣伝)?されました。 .*?/,
             author: Author.user,
         },
         {
             label: 'ニコニ広告の宣伝(した)',
             type: 'nicovideo.user.video.advertise',
             // also nicoad.user.advertise.video
+            // also nicoad.user.advertise.program
+            // also nicoad.user.advertise.program.cas
             regexp: /.*? さんが ?ニコニ広告(?:で宣伝)?しました。 .*?/,
             author: Author.user,
         },
@@ -181,6 +185,12 @@ const Message = {
             label: 'イラストのクリップ',
             type: 'nicoseiga.user.illust.clip',
             regexp: /.*? さんが イラストをクリップしました。/,
+            author: Author.user,
+        },
+        {
+            label: '生放送の開始',
+            type: 'live.user.program.cas.onairs',
+            regexp: /.*? さんが 生放送(?:（実験放送）)?を開始しました。/,
             author: Author.user,
         },
         {

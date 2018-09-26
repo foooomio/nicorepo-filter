@@ -190,7 +190,7 @@ const Message = {
         {
             label: '生放送の開始',
             type: 'live.user.program.cas.onairs',
-            regexp: /.*? さんが 生放送(?:（実験放送）)?を開始しました。/,
+            regexp: /.*? さんが コミュニティ .*? で生放送(?:（実験放送）)?を開始しました。/,
             author: Author.user,
         },
         {

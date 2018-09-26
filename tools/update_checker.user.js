@@ -9,12 +9,12 @@
 // @grant        none
 // ==/UserScript==
 
-(() => {
+{
     'use strict';
 
     const [match, version, ...rest] = /ja-jp.js\?(\d{8})/.exec(document.body.innerHTML);
 
-    if (version !== '20180713') {
+    if (version !== '20180714') {
         alert(`ja-jp.js が更新されています。( ${match} )`);
     }
-})();
+}

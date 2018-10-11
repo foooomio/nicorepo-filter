@@ -24,8 +24,8 @@
     },
     "content_scripts": [{
         "matches": [
-            "http://www.nicovideo.jp/my/top*",
-            "http://www.nicovideo.jp/user*"
+            "*://www.nicovideo.jp/my/top*",
+            "*://www.nicovideo.jp/user*"
         ],
         "js": [
             "js/timeline.js",

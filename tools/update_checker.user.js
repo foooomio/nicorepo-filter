@@ -4,7 +4,7 @@
 // @version      0.1
 // @author       foooomio
 // @license      MIT License
-// @match        http://www.nicovideo.jp/my/top
+// @match        https://www.nicovideo.jp/my/top
 // @run-at       document-idle
 // @grant        none
 // ==/UserScript==

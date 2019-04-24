@@ -1,7 +1,11 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "webextensions": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
     },
     "extends": "eslint:recommended",
     "rules": {
@@ -21,10 +25,9 @@
             "error",
             "always"
         ],
-        "no-unused-vars": 0
+        "no-unused-vars": "off"
     },
     "globals": {
-        "chrome": false,
         "Message": false,
         "Author": false,
         "Timeline": false,

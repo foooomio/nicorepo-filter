@@ -27,6 +27,9 @@
             "*://www.nicovideo.jp/my/top*",
             "*://www.nicovideo.jp/user*"
         ],
+        "exclude_matches": [
+            "*://www.nicovideo.jp/user/*/*"
+        ],
         "js": [
             "js/timeline.js",
             "js/message.js",

@@ -136,12 +136,14 @@ const Message = {
         {
             label: 'ゲームの投稿',
             type: 'nicovideo.user.nicogame.upload',
+            // also nicogame.user.game.upload
             regexp: /.*? さんがゲームを投稿しました。/,
             author: Author.user,
         },
         {
             label: 'ゲームの更新',
             type: 'nicovideo.user.nicogame.update',
+            // also nicogame.user.game.update
             regexp: /.*? さんがゲームを更新しました。/,
             author: Author.user,
         },
@@ -232,19 +234,23 @@ const Message = {
         {
             label: '動画の追加',
             type: 'nicovideo.user.community.video.add',
+            // also nicommunity.user.video.registered
             regexp: /.*? さんが コミュニティ .*? に動画を追加しました。/,
             author: Author.community,
         },
         {
             label: 'お知らせの追加',
             type: 'nicovideo.user.community.info.add',
-            regexp: /.*? さんが コミュニティ .*? にお知らせを追加しました。/,
+            // also nicommunity.user.community_news.created
+            regexp: /.*? さんが コミュニティ .*? にお知らせを追加しました。|お知らせ .*? を コミュニティ .*? に追加しました。/,
             author: Author.community,
         },
         {
             label: 'レベル上昇',
             type: 'nicovideo.community.level.raise',
-            regexp: /.*? の コミュニティレベルが .*? になりました。 .*? が付与されました。/,
+            // also nicommunity.community.no_privileged.levelup
+            // also nicommunity.community.privileged.levelup
+            regexp: /.*? の コミュニティレベルが .*? になりました。/,
             author: Author.community,
         },
         {

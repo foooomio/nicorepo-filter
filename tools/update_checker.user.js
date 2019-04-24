@@ -12,9 +12,9 @@
 (() => {
     'use strict';
 
-    const [match, version, ...rest] = /ja-jp.js\?(\d{8})/.exec(document.body.innerHTML);
+    const [match, version] = /ja-jp.js\?(\d{8})/.exec(document.body.innerHTML);
 
-    if (version !== '20180714') {
+    if (version !== '20190424') {
         alert(`ja-jp.js が更新されています。( ${match} )`);
     }
 })();

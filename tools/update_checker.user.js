@@ -14,7 +14,7 @@
 
     const [match, version] = /ja-jp.js\?(\d{8})/.exec(document.body.innerHTML);
 
-    if (version !== '20190424') {
+    if (version !== '20190530') {
         alert(`ja-jp.js が更新されています。( ${match} )`);
     }
 })();

@@ -4,53 +4,78 @@
 
 'use strict';
 
-const observer = new MutationObserver(mutations => {
-    mutations.filter(mutation =>
-        mutation.addedNodes.length
-    ).map(mutation => {
-        // Handle the added nicorepo
+const $ = document.querySelector.bind(document);
+
+// 「さらに読み込む」で追加される要素を処理するオブザーバー
+const timelineObserver = new MutationObserver(mutations => {
+    for (const mutation of mutations) {
+        if (mutation.addedNodes.length === 0) continue;
+
         const node = mutation.addedNodes[0];
         Timeline.push(new TimelineItem(node));
-    });
+    }
 });
 
-const initializer = new MutationObserver(mutations => {
-    mutations.filter(mutation =>
-        mutation.addedNodes.length
-    ).filter(mutation =>
-        mutation.addedNodes[0].className === 'NicorepoTimeline timeline'
-    ).map(mutation => {
+// nicorepo-page の変更を検知するオブザーバー
+const nicorepoPageObserver = new MutationObserver(mutations => {
+    for (const mutation of mutations) {
+        if (mutation.addedNodes.length === 0) continue;
+
         const target = mutation.addedNodes[0];
+        if (target.className !== 'NicorepoTimeline timeline') continue;
 
-        // Handle the initial nicorepo
-        Array.from(target.childNodes).map(node => {
-            if (node.className !== 'NicorepoTimelineItem log') return;
+        Timeline.clear();
+
+        for (const node of target.childNodes) {
+            if (node.className !== 'NicorepoTimelineItem log') continue;
             Timeline.push(new TimelineItem(node));
-        });
+        }
 
-        // Observe the page load more nicorepo
-        observer.observe(target, { childList: true });
-        initializer.disconnect();
+        timelineObserver.disconnect();
+        timelineObserver.observe(target, { childList: true });
 
-        // Force to fire LazyLoad
+        // LazyLoad を発火させるワークアラウンド
         window.scroll(0, 1);
         window.scroll(0, 0);
-    });
+
+        return;
+    }
+});
+
+// nicorepo-page にオブザーバーを追加するオブザーバー
+const nicorepoAppObserver = new MutationObserver(mutations => {
+    for (const mutation of mutations) {
+        if (mutation.addedNodes.length === 0) continue;
+
+        const target = $('.nicorepo-page');
+        if (!target) continue;
+
+        nicorepoPageObserver.observe(target, { childList: true });
+
+        // 自身を破棄
+        nicorepoAppObserver.disconnect();
+
+        return;
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const target = $('.nicorepo-page');
+    if (target) {
+        nicorepoPageObserver.observe(target, { childList: true });
+    } else {
+        // nicorepo-page がなければオブザーバーをひとつかます
+        const app = $('#MyPageNicorepoApp') || $('#UserPageNicorepoApp');
+        nicorepoAppObserver.observe(app, { childList: true });
+    }
 });
 
 // Get stored data
 chrome.storage.sync.get(null, data =>
-    data.rules && Timeline.actionAll(data.rules)
+    data.rules && Timeline.update(data.rules)
 );
 chrome.storage.onChanged.addListener(data =>
-    data.rules && Timeline.actionAll(data.rules.newValue)
+    data.rules && Timeline.update(data.rules.newValue)
 );
 
 chrome.runtime.sendMessage('show_page_action');
-
-// Call the initializer
-document.addEventListener('DOMContentLoaded', () => {
-    const target = document.getElementById('MyPageNicorepoApp')
-                || document.getElementById('UserPageNicorepoApp');
-    initializer.observe(target, { childList: true, subtree: true });
-});

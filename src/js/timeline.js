@@ -34,17 +34,20 @@ class TimelineItem {
 const Timeline = {
     items: [],
     rules: [],
+    clear() {
+        this.items = [];
+    },
     /**
-     * @param {Object} rule
+     * @param {Rule[]} rules
      */
-    actionAll(rules) {
+    update(rules) {
         this.rules = rules;
         this.items.map(item => item.action(this.rules));
     },
     /**
-     * @param {TimelineItem}
+     * @param {TimelineItem} item
      */
-    push: function(item) {
+    push(item) {
         item.action(this.rules);
         this.items.push(item);
     }

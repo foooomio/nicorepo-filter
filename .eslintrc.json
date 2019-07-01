@@ -25,6 +25,12 @@
             "error",
             "always"
         ],
+        "no-redeclare": [
+            "error",
+            {
+                "builtinGlobals": false
+            }
+        ],
         "no-console": "off",
         "no-unused-vars": "off"
     },

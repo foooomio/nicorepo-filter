@@ -44,7 +44,7 @@ const Message = {
             // also nicoad.user.advertised.program.announce
             // also nicoad.user.advertised.program.cas.announce
             // also nicoad.user.advertised.game.announce
-            regexp: /.*? さんの(?:動画|生放送(?:（実験放送）|ゲーム)?)が .*? さんにニコニ広告(?:で宣伝)?されました。 .*?/,
+            regexp: /.*? さんの(?:動画|生放送(?:（実験放送）)?|ゲーム)が .*? さんにニコニ広告(?:で宣伝)?されました。 .*?/,
             author: Author.user,
         },
         {

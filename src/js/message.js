@@ -43,7 +43,8 @@ const Message = {
             // also nicoad.user.advertised.video.announce
             // also nicoad.user.advertised.program.announce
             // also nicoad.user.advertised.program.cas.announce
-            regexp: /.*? さんの(?:動画|生放送(?:（実験放送）)?)が .*? さんにニコニ広告(?:で宣伝)?されました。 .*?/,
+            // also nicoad.user.advertised.game.announce
+            regexp: /.*? さんの(?:動画|生放送(?:（実験放送）|ゲーム)?)が .*? さんにニコニ広告(?:で宣伝)?されました。 .*?/,
             author: Author.user,
         },
         {
@@ -52,6 +53,7 @@ const Message = {
             // also nicoad.user.advertise.video
             // also nicoad.user.advertise.program
             // also nicoad.user.advertise.program.cas
+            // also nicoad.user.advertise.game
             regexp: /.*? さんが ?ニコニ広告(?:で宣伝)?しました。 .*?/,
             author: Author.user,
         },
@@ -232,17 +234,23 @@ const Message = {
             author: Author.community,
         },
         {
-            label: '動画の追加',
+            label: '動画の登録',
             type: 'nicovideo.user.community.video.add',
             // also nicommunity.user.video.registered
-            regexp: /.*? さんが コミュニティ .*? に動画を追加しました。/,
+            regexp: /.*? さんが コミュニティ .*? に動画を登録しました。/,
             author: Author.community,
         },
         {
-            label: 'お知らせの追加',
+            label: 'イラストの登録',
+            type: 'nicommunity.user.illust.registered',
+            regexp: /.*? さんが コミュニティ .*? にイラストを登録しました。/,
+            author: Author.community,
+        },
+        {
+            label: 'お知らせの登録',
             type: 'nicovideo.user.community.info.add',
             // also nicommunity.user.community_news.created
-            regexp: /.*? さんが コミュニティ .*? にお知らせを追加しました。|お知らせ .*? を コミュニティ .*? に追加しました。/,
+            regexp: /.*? さんが コミュニティ .*? にお知らせを追加しました。|お知らせ .*? を コミュニティ .*? に登録しました。/,
             author: Author.community,
         },
         {

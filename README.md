@@ -21,7 +21,7 @@
 
 ## バグ報告・要望
 - GitHubアカウントをお持ちの方は、Issueに記入してください。
-- お持ちでない方は、[サポート](https://chrome.google.com/webstore/detail/%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%9D%E3%83%BB%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC/pcoahkcikijkecjcfclmoggolnocabfk/support?hl=ja)に記入してください。その際、 [Twitter](https://twitter.com/foooomio) または [Mastodon](https://mstdn.jp/@foooomio) にリプライをいただけると早く対応できます。
+- お持ちでない方は、[サポート](https://chrome.google.com/webstore/detail/%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%9D%E3%83%BB%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC/pcoahkcikijkecjcfclmoggolnocabfk/support?hl=ja)に記入してください。その際、 [Twitter](https://twitter.com/foooomio) または [Mastodon](https://handon.club/@foooomio) にリプライをいただけると早く対応できます。
 
 ## ライセンス
 MIT License

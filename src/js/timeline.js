@@ -19,7 +19,7 @@ class TimelineItem {
     }
     mute(rule) {
         this.node.style.display = 'none';
-        this.node.style.backgroundColor = 'initial';
+        this.node.style.backgroundColor = '#fff';
     }
     highlight(rule) {
         this.node.style.display = 'block';
@@ -27,7 +27,7 @@ class TimelineItem {
     }
     reset() {
         this.node.style.display = 'block';
-        this.node.style.backgroundColor = 'initial';
+        this.node.style.backgroundColor = '#fff';
     }
 }
 

@@ -12,7 +12,9 @@ const timelineObserver = new MutationObserver(mutations => {
         if (mutation.addedNodes.length === 0) continue;
 
         const node = mutation.addedNodes[0];
-        Timeline.push(new TimelineItem(node));
+        const item = isNewMyPage ? node.childNodes[0] : node;
+        if (!item || item.className !== (isNewMyPage ? 'NicorepoItem-item' : 'NicorepoTimelineItem log')) continue;
+        Timeline.push(new TimelineItem(item));
     }
 });
 
@@ -21,22 +23,23 @@ const nicorepoPageObserver = new MutationObserver(mutations => {
     for (const mutation of mutations) {
         if (mutation.addedNodes.length === 0) continue;
 
-        const target = mutation.addedNodes[0];
-        if (target.className !== 'NicorepoTimeline timeline') continue;
+        const target = $('.NicorepoTimeline');
+        if (!target) continue;
 
         Timeline.clear();
 
         for (const node of target.childNodes) {
-            if (node.className !== 'NicorepoTimelineItem log') continue;
-            Timeline.push(new TimelineItem(node));
+            const item = isNewMyPage ? node.childNodes[0] : node;
+            if (!item || item.className !== (isNewMyPage ? 'NicorepoItem-item' : 'NicorepoTimelineItem log')) continue;
+            Timeline.push(new TimelineItem(item));
         }
 
         timelineObserver.disconnect();
         timelineObserver.observe(target, { childList: true });
 
         // LazyLoad を発火させるワークアラウンド
-        window.scroll(0, 1);
-        window.scroll(0, 0);
+        window.scrollBy(0, 1);
+        window.scrollBy(0, -1);
 
         return;
     }
@@ -59,13 +62,17 @@ const nicorepoAppObserver = new MutationObserver(mutations => {
     }
 });
 
+let isNewMyPage;
+
 document.addEventListener('DOMContentLoaded', () => {
-    const target = $('.nicorepo-page');
+    isNewMyPage = !!$('.UserPage-main');
+    const target = $(isNewMyPage ? '.UserPage-main' : '.nicorepo-page');
     if (target) {
-        nicorepoPageObserver.observe(target, { childList: true });
+        nicorepoPageObserver.observe(target, { childList: true, subtree: true });
     } else {
         // nicorepo-page がなければオブザーバーをひとつかます
         const app = $('#MyPageNicorepoApp') || $('#UserPageNicorepoApp');
+        if (!app) return;
         nicorepoAppObserver.observe(app, { childList: true });
     }
 });
@@ -77,5 +84,3 @@ chrome.storage.sync.get(null, data =>
 chrome.storage.onChanged.addListener(data =>
     data.rules && Timeline.update(data.rules.newValue)
 );
-
-chrome.runtime.sendMessage('show_page_action');

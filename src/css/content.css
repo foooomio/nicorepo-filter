@@ -10,3 +10,11 @@
 .log .log-mute-button {
   right: 8px !important;
 }
+
+.NicorepoTimeline-item+.NicorepoTimeline-item {
+  margin-top: 0 !important;
+}
+
+.NicorepoItem-item {
+  margin-top: 8px !important;
+}

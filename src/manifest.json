@@ -5,33 +5,27 @@
     "description": "ニコニコ動画のニコレポタイムラインにミュート・ハイライト機能を追加します。",
     "icons": {
         "16": "img/icon16.png",
+        "24": "img/icon24.png",
+        "32": "img/icon32.png",
         "48": "img/icon48.png",
         "128": "img/icon128.png"
     },
     "permissions": [ "storage" ],
-    "background": {
-        "scripts": [ "js/background.js" ],
-        "persistent": false
-    },
-    "page_action": {
+    "browser_action": {
         "default_icon": {
             "16": "img/icon16.png",
             "24": "img/icon24.png",
-            "32": "img/icon32.png"
+            "32": "img/icon32.png",
+            "48": "img/icon48.png",
+            "128": "img/icon128.png"
         },
         "default_title": "ニコレポ・フィルター",
         "default_popup": "popup.html"
     },
     "content_scripts": [{
         "matches": [
-            "*://www.nicovideo.jp/my",
-            "*://www.nicovideo.jp/my/",
-            "*://www.nicovideo.jp/my?*",
-            "*://www.nicovideo.jp/my/top*",
-            "*://www.nicovideo.jp/user*"
-        ],
-        "exclude_matches": [
-            "*://www.nicovideo.jp/user/*/*"
+            "https://www.nicovideo.jp/my*",
+            "https://www.nicovideo.jp/user*"
         ],
         "js": [
             "js/timeline.js",

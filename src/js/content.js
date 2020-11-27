@@ -27,6 +27,7 @@ const userPageObserver = new MutationObserver(mutations => {
         if (!target) continue;
 
         Timeline.clear();
+        TimelineItem.isDarkMode = document.body.matches('.niconico-darkmode-setting-true');
 
         for (const node of target.children) {
             const item = node.children[0];

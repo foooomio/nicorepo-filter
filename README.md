@@ -2,7 +2,9 @@
 ニコニコ動画のニコレポタイムラインにミュート・ハイライト機能を追加します。
 
 ## インストール
-[![Google Chrome](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%9D%E3%83%BB%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC/pcoahkcikijkecjcfclmoggolnocabfk?hl=ja) [![Firefox](https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png)](https://addons.mozilla.org/ja/firefox/addon/%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%9D-%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC/)
+[![Available in the Chrome Web Store](https://user-images.githubusercontent.com/1075914/104359656-4698d600-5553-11eb-99d5-2344ac26b544.png)](https://chrome.google.com/webstore/detail/%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%9D%E3%83%BB%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC/pcoahkcikijkecjcfclmoggolnocabfk) [![Get the add-on for Firefox](https://user-images.githubusercontent.com/1075914/104359743-64663b00-5553-11eb-8842-81c102a08a1a.png)](https://addons.mozilla.org/ja/firefox/addon/%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%9D-%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC/)
+
+[Get the add-on for Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%9D%E3%83%BB%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC/anbgeajolccfkmpggcbknjbjhghmhkmn)
 
 ## 使い方
 1. ブラウザの右上に表示される拡張機能のアイコンをクリックします。ニコニコ動画の以下のページのみで動作します。
